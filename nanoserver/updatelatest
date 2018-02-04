@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+for i in `seq 6 9`; do
+
+    l=`ls -d $i* | tail -n 1`
+    /bin/cp -r -T $l $i-latest
+done
