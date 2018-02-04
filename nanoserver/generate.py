@@ -12,19 +12,18 @@ MAINTAINER Boshi Lian <farmer1992@gmail.com>
 
 ENV JDK_URL %s
 ENV JDK_VERSION %s
-
 ''' 
 
 STATIC=r'''
 RUN powershell -NoProfile -Command \
         Invoke-WebRequest %JDK_URL% -OutFile jdk.zip; \
         Expand-Archive jdk.zip -DestinationPath '%ProgramFiles%'; \
-        Move-Item '%ProgramFiles%\java*' '%ProgramFiles%\jdk'; \
+        Move-Item '%ProgramFiles%\zulu*' '%ProgramFiles%\zulujdk'; \
         Remove-Item -Force jdk.zip
 
-RUN setx /M JAVA_HOME "%ProgramFiles%\jdk\jre"
+RUN setx /M JAVA_HOME "%ProgramFiles%\zulujdk\jre"
 
-RUN setx /M PATH "%PATH%;%ProgramFiles%\jdk\bin"
+RUN setx /M PATH "%PATH%;%ProgramFiles%\zulujdk\bin"
 '''
 
 def pull_release():
